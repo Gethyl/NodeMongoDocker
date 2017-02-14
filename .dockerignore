@@ -1,0 +1,7 @@
+node_nodule
+.gitignore
+yarn.lock
+dbDocker/docker-compose.yml
+dbDocker/Dockerfile
+docker-compose.yml
+*.md

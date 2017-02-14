@@ -1,0 +1,10 @@
+version: '2'
+services:
+    db:
+        image: "mongo"
+        container_name: my-mongo
+#        ports: 
+#        - '27017:27017'
+        expose: 
+        - '27017'
+        command: "--smallfiles --logpath=/dev/null"

@@ -1,0 +1,25 @@
+version: '2'
+services:
+  web:
+    ports:
+      - '3500:3000'
+      - '27017:27017'
+#    image: getznode/web:latest
+    build: .
+    volumes:
+     - .:/webdocker
+    links: 
+     - db 
+#    external_links:
+#     - my-mongo 
+#    environment:
+#     - PORT=3000
+#     - DB_PORT_27017_TCP_ADDR=127.20.0.2
+#     - DB_PORT_27017_TCP_PORT=27017
+#    env_file:
+#     - web.env
+#    expose: 
+#      - '27017'
+#    mem_limit: 1024m
+#    restart: always
+  
