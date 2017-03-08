@@ -14,8 +14,14 @@ docker rm <container>
 
 ## Using Docker Compose
 # Docker compose bringing up the containers using multiple yml files
+```
 docker-compose -f docker-compose.yml -f ./dbDocker/docker-compose.yml up
+```
 
+# Docker execute the scripts in mongo shell
+```
+docker exec my-mongo mongo local dbSetup.js
+```
 
 ## MongoDB Shell commands used.
 `use local`

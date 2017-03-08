@@ -15,12 +15,30 @@ app.use(bodyParser.json())
 let dockerDb = process.env.DB_PORT
 console.log("*******************************")
 
-mongoose.connect('mongodb://172.20.0.2:27017/local')
+mongoose.connect('mongodb://my-mongo:27017/local')
 
 var db = mongoose.connection
-db.on('error', ()=> {console.log( '---Gethyl FAILED to connect to mongoose')})
+db.on('error', (err)=> {
+	console.error( '---Gethyl FAILED to connect to mongoose')
+	console.dir(err)	
+})
 db.once('open', () => {
 	console.log( '+++Gethyl connected to mongoose')
+	mongoose.connection.db.listCollections().toArray((error,collectionList)=>{
+		if (error) {
+			throw new Error(error);
+		} else {
+			let isCollectionPresent = 
+				collectionList.findIndex((eachCollection) => {
+					console.log(eachCollection.name)
+					return  eachCollection.name === "TodoTesting" ? true : false 
+				});
+			console.log("Collection Present Value ==> "+ isCollectionPresent)
+			if (isCollectionPresent<0){
+				console.log("Collection not found....")
+			}		
+		}
+	})
 })
 
 
@@ -35,4 +53,4 @@ app.get('/test',(req,res)=>{
  
 
 var serve = http.createServer(app);
-serve.listen(3000,()=> {console.log("+++Gethyl Express Server test with Docker!!!")})
+serve.listen(3000,()=> {console.log("+++Gethyl Express Server started Docker with port 3000!!!")})
