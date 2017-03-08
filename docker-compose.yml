@@ -37,5 +37,19 @@ services:
     # expose: 
     #  - '27017'
     command: "--smallfiles --logpath=/dev/null "
+  redis:
+    image: "redis:latest"
+    # build: ./mongoDocker
+    container_name: my-redis
+    # dockerfile: Dockerfile-Mongo
+    ports: 
+     - '6379:6379'
+# Persisting the data using Volume     
+    volumes:
+     - my-redis-data:/data
+    # expose: 
+    #  - '27017'
+#    command: "--smallfiles --logpath=/dev/null "
 volumes:
   my-mongo-data:
+  my-redis-data:
